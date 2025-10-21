@@ -1,0 +1,1 @@
+// https://localhost:7265/api/Store/2/pdf
