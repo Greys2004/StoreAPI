@@ -22,73 +22,6 @@ namespace StoreApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("StoreApi.Models.Entities.Invoice", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("BillingAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BillingEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BillingName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Currency")
-                        .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
-
-                    b.Property<DateTime?>("DueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("InvoiceNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsPaid")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("IssueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("PaymentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("Subtotal")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Tax")
-                        .HasColumnType("float");
-
-                    b.Property<string>("TaxId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Total")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("Invoices");
-                });
-
             modelBuilder.Entity("StoreApi.Models.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -110,7 +43,7 @@ namespace StoreApi.Migrations
 
                     b.HasIndex("SystemUserId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Order", (string)null);
                 });
 
             modelBuilder.Entity("StoreApi.Models.Entities.OrderProduct", b =>
@@ -133,7 +66,7 @@ namespace StoreApi.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderProducts");
+                    b.ToTable("OrderProducts", (string)null);
                 });
 
             modelBuilder.Entity("StoreApi.Models.Entities.Product", b =>
@@ -162,7 +95,7 @@ namespace StoreApi.Migrations
 
                     b.HasIndex("StoreId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
 
                     b.HasData(
                         new
@@ -235,7 +168,7 @@ namespace StoreApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Stores");
+                    b.ToTable("Stores", (string)null);
 
                     b.HasData(
                         new
@@ -308,7 +241,7 @@ namespace StoreApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SystemUsers");
+                    b.ToTable("SystemUsers", (string)null);
 
                     b.HasData(
                         new
@@ -319,17 +252,6 @@ namespace StoreApi.Migrations
                             LastName = "Juan",
                             Password = "123456"
                         });
-                });
-
-            modelBuilder.Entity("StoreApi.Models.Entities.Invoice", b =>
-                {
-                    b.HasOne("StoreApi.Models.Entities.Order", "Order")
-                        .WithMany("Invoices")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("StoreApi.Models.Entities.Order", b =>
@@ -375,8 +297,6 @@ namespace StoreApi.Migrations
 
             modelBuilder.Entity("StoreApi.Models.Entities.Order", b =>
                 {
-                    b.Navigation("Invoices");
-
                     b.Navigation("OrderProducts");
                 });
 
